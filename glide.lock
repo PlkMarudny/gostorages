@@ -1,0 +1,25 @@
+hash: c831fbfdcae09cdf3f56a6a1307bc2dc22b5feafe28faea62650f6f9393202cf
+updated: 2017-07-06T11:25:28.8194322+04:00
+imports:
+- name: github.com/djherbis/times
+  version: d25002f62be22438b4cd804b9d3c8db1231164d0
+- name: github.com/mitchellh/goamz
+  version: caaaea8b30ee15616494ee68abd5d8ebbbef05cf
+  subpackages:
+  - aws
+  - s3
+- name: github.com/stretchr/testify
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  subpackages:
+  - assert
+- name: github.com/vaughan0/go-ini
+  version: a98ad7ee00ec53921f08832bc06ecf7fd600e6a1
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib

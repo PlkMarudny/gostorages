@@ -22,7 +22,7 @@ type VizGHFile struct {
 
 func NewVizGHStorage(url string, folder string, user string, pass string) *VizGHStorage {
 	return &VizGHStorage{
-		NewBaseStorage(url, folder),
+		NewBaseStorage(folder, url),
 		user,
 		pass,
 	}
@@ -36,15 +36,13 @@ func (v *VizGHStorage) Save(name string, file File) error {
 		return err
 	}
 
-	client := &http.Client{}
-	url:= assembleSaveUrl(v.BaseURL, v.Location, name)
+	saveUrl := assembleSaveUrl(v.BaseURL, v.Location, name)
 
-	req, _ := http.NewRequest("POST", url.String(), bytes.NewReader(content))
+	client := &http.Client{}
+	req, _ := http.NewRequest("POST", saveUrl.String(), bytes.NewReader(content))
 	req.Header.Set("Slug", filepath.Base(name))
 	req.Header.Set("Content-Type", mime.TypeByExtension(filepath.Ext(name)))
 	req.SetBasicAuth(v.User, v.Pass)
-
-	defer req.Body.Close()
 
 	_, err = client.Do(req)
 	if err != nil {
@@ -54,6 +52,7 @@ func (v *VizGHStorage) Save(name string, file File) error {
 	return nil
 }
 
+// url in a form http://server/uuid/name, where uuid describes the folder
 func assembleSaveUrl(base, location, name string) *url.URL {
 	b, _ := url.Parse(base)
 	u, _ := url.Parse(strings.Join([]string{"folder", location, name}, "/"))
