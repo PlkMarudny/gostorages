@@ -10,6 +10,8 @@ Currently, it supports the following storages:
 
 * Amazon S3
 * File system
+* Viz Graphic Hub - https://documentation.vizrt.com/graphic-hub-2.4.html. 
+This particular storage can be used to store JPG and PNG images only at the moment.
 
 Installation
 ============
