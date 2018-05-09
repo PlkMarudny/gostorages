@@ -3,8 +3,8 @@ package gostorages
 import (
 	"bytes"
 	"io/ioutil"
-	"path"
 	"strings"
+	"path/filepath"
 )
 
 type BaseStorage struct {
@@ -52,6 +52,6 @@ func (s *BaseStorage) HasBaseURL() bool {
 }
 
 // Path joins the given file to the storage path
-func (s *BaseStorage) Path(filepath string) string {
-	return path.Join(s.Location, filepath)
+func (s *BaseStorage) Path(fPath string) string {
+	return filepath.Join(s.Location, fPath)
 }

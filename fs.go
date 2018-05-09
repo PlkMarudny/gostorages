@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 	"github.com/djherbis/times"
+	"path/filepath"
 )
 
 // Storage is a file system storage handler
@@ -65,16 +66,16 @@ func (s *FileSystemStorage) Save(filepath string, file File) error {
 }
 
 // SaveWithPermissions saves a file with the given permissions to the storage
-func (s *FileSystemStorage) SaveWithPermissions(filepath string, file File, perm os.FileMode) error {
+func (s *FileSystemStorage) SaveWithPermissions(fPath string, file File, perm os.FileMode) error {
 	_, err := os.Stat(s.Location)
 
 	if err != nil {
 		return err
 	}
 
-	location := s.Path(filepath)
+	location := s.Path(fPath)
 
-	basename := location[:strings.LastIndex(location, "/")+1]
+	basename, _ := filepath.Split(location)
 
 	err = os.MkdirAll(basename, perm)
 
